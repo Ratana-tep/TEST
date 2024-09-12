@@ -14,14 +14,14 @@
 
     <script>
         // The original HTTP resource you want to access
-        const imageUrl = 'http://180.178.127.119:8282/Ratana/Chrysanthemum.jpg';
+        const imageUrl = 'https://drive.google.com/uc?export=view&id=1it_s3BknEmbdX-W8UsTLyVW9mJsjY_e0';
 
         // CORS proxy URL to avoid mixed content issues
-        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+     
 
         function fetchImage() {
             console.log('Fetching image via CORS proxy...');
-            fetch(corsProxy + imageUrl)
+            fetch( imageUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok: ' + response.statusText);
