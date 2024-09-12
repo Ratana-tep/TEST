@@ -11,39 +11,23 @@
     <div id="image-container">
         <!-- The fetched image will be displayed here -->
     </div>
-
     <script>
-        // URL of the image hosted over HTTP
         const imageUrl = 'http://180.178.127.119:8282/Ratana/Chrysanthemum.jpg';
-
-        // Use a CORS proxy to bypass CORS restrictions
-        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-        // Function to fetch the image using a CORS proxy
+        const corsProxy = 'https://corsproxy.io/?';
+    
         function fetchImage() {
             fetch(corsProxy + imageUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.blob();
-                })
+                .then(response => response.blob())
                 .then(imageBlob => {
-                    // Create an image element
                     const imgElement = document.createElement('img');
                     imgElement.src = URL.createObjectURL(imageBlob);
-                    imgElement.alt = 'Fetched Image';
-
-                    // Append the image to the div
                     document.getElementById('image-container').appendChild(imgElement);
                 })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
+                .catch(error => console.error('Error:', error));
         }
-
-        // Call the function to fetch the image on page load
+    
         window.onload = fetchImage;
     </script>
+    
 </body>
 </html>
