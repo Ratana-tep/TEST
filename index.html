@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch Image Example</title>
+    <title>Fetch Image Example from HTTP using CORS Proxy</title>
 </head>
 <body>
     <h1>Fetch and Display Image</h1>
@@ -13,12 +13,15 @@
     </div>
 
     <script>
-        // URL of the image to fetch
-        const imageUrl = 'http://180.178.127.119:8282/Ratana/Chrysanthemum.jpg'; 
+        // URL of the image hosted over HTTP
+        const imageUrl = 'http://180.178.127.119:8282/Ratana/Chrysanthemum.jpg';
 
-        // Function to fetch the image
+        // Use a CORS proxy to bypass CORS restrictions
+        const corsProxy = 'https://cors-anywhere.herokuapp.com/';
+
+        // Function to fetch the image using a CORS proxy
         function fetchImage() {
-            fetch(imageUrl)
+            fetch(corsProxy + imageUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
