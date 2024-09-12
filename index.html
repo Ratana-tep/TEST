@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Image Example</title>
+</head>
+<body>
+    <h1>Fetch and Display Image</h1>
+
+    <div id="image-container">
+        <!-- The fetched image will be displayed here -->
+    </div>
+
+    <script>
+        // URL of the image to fetch
+        const imageUrl = 'http://example.com/path/to/image.jpg'; // Replace with the actual image URL
+
+        // Function to fetch the image
+        function fetchImage() {
+            fetch(imageUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(imageBlob => {
+                    // Create an image element
+                    const imgElement = document.createElement('img');
+                    imgElement.src = URL.createObjectURL(imageBlob);
+                    imgElement.alt = 'Fetched Image';
+
+                    // Append the image to the div
+                    document.getElementById('image-container').appendChild(imgElement);
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        }
+
+        // Call the function to fetch the image on page load
+        window.onload = fetchImage;
+    </script>
+</body>
+</html>
