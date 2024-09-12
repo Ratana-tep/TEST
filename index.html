@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch Image Example from HTTP using CORS Proxy</title>
+    <title>Fetch and Display Image using CORS Proxy</title>
 </head>
 <body>
     <h1>Fetch and Display Image</h1>
@@ -13,37 +13,35 @@
     </div>
 
     <script>
-        // Image URL (HTTP resource that we want to fetch)
+        // The original HTTP resource you want to access
         const imageUrl = 'http://180.178.127.119:8282/Ratana/Chrysanthemum.jpg';
 
-        // Use the CORS Anywhere proxy to bypass the CORS restrictions
+        // CORS proxy URL to avoid mixed content issues
         const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
         function fetchImage() {
-            // Fetch the image using the CORS proxy
+            console.log('Fetching image via CORS proxy...');
             fetch(corsProxy + imageUrl)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        throw new Error('Network response was not ok: ' + response.statusText);
                     }
-                    console.log('Image fetched successfully.');
-                    return response.blob();  // Convert the response to a Blob (binary large object)
+                    return response.blob();  // Convert response to a Blob object
                 })
                 .then(imageBlob => {
-                    // Create a URL for the image blob and display it
+                    // Create a URL for the blob and display the image
                     const imgElement = document.createElement('img');
                     imgElement.src = URL.createObjectURL(imageBlob);
                     document.getElementById('image-container').appendChild(imgElement);
                     console.log('Image displayed successfully.');
                 })
                 .catch(error => {
-                    console.error('There was an error fetching the image:', error);
+                    console.error('Error fetching the image:', error);
                 });
         }
 
-        // Fetch and display the image when the page loads
         window.onload = fetchImage;
     </script>
-    
+
 </body>
 </html>
